@@ -1,0 +1,121 @@
+﻿.grid-30-70 {
+    grid-template-columns: 30% 70%;
+}
+
+.modal-header {
+    padding: 0px 1rem;
+    border: 0;
+
+    button {
+        font-size: 40px;
+        outline:0;
+        &:hover{
+            outline:0;
+        }
+    }
+}
+
+.modal-body{
+    padding-top:0;
+    padding-bottom:0;
+}
+
+h5 {
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: #969797;
+    margin-bottom: 0;
+}
+
+.price-venta {
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom:5px;
+    span {
+        color: #F7A832;
+        font-family: Barlow;
+        font-size: 24px;
+        margin-right: 10px;
+    }
+}
+
+h7, b {
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+b{
+    text-transform: uppercase;
+    font-weight:bold;
+    font-size:12px;
+}
+
+p {
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.item__quantity__input__plus {
+    display: flex;
+    align-items: center;
+
+    button {
+        padding: 10px;
+        background: #fff;
+        border: 1px solid #E37725;
+        cursor: pointer;
+        color: #E37725;
+    }
+
+    input {
+        padding: 10px 0 10px 10px;
+        width: 50px;
+        border: 0;
+        color: #E37725;
+        background-color: #F2F2F2;
+    }
+}
+
+.modal-footer {
+    a {
+        font-size: 18px;
+        color: #E37725;
+
+        i {
+            margin-left: 10px;
+            position: relative;
+            top: 3px;
+            font-size: 20px;
+        }
+    }
+}
+
+.btn-carrito {
+    background: #e37725;
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    color: #f9f9f9;
+    padding: .5rem 1rem;
+    margin-left:20px;
+
+    &:hover, &:active, &:focus {
+        background-color: #16ab7d;
+        text-decoration: none;
+        color: #fff;
+        opacity: 1;
+    }
+}

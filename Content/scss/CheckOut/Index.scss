@@ -1,0 +1,137 @@
+﻿.login-register-pago {
+    padding: 60px;
+
+    h3 {
+        font-family: Barlow;
+
+        &:before, &:after {
+            content: "";
+        }
+    }
+
+    .head-title-product {
+        margin-bottom: 30px;
+    }
+
+    .form-register-login {
+        max-width: 460px;
+        margin: 0 auto;
+
+        h5 {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-family: BarlowBold;
+        }
+
+        p {
+            font-weight: 500;
+            font-family: Barlow;
+            font-size: 14px;
+            margin: 15px 0 10px 0;
+        }
+
+        input {
+            background-color: #f2f2f2;
+            font-size: 13px;
+            margin: 6px 0;
+        }
+    
+        }
+    }
+
+#checkOut {
+    .iptCantidad {
+        border: 0;
+        text-align: center;
+    }
+
+    h5 {
+        margin-bottom: 10px;
+    }
+
+    p {
+        margin-bottom: 5px !important;
+
+        &.marca {
+            color: #616D70;
+            font-family: Barlow;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+    }
+
+    .cantidad-text {
+        color: #000;
+        font-family: Barlow;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    input {
+        color: #000 !important;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    .content-product .content-info .image-product img {
+        width: 100% !important;
+    }
+
+    .bottom-vertical {
+        align-items: center;
+        display: flex;
+
+        p {
+            color: #000;
+            font-weight: 600;
+            font-size: 13px;
+
+            &.text-igv {
+                color: #616D70;
+            }
+        }
+    }
+
+    .table th, .table td {
+        color: #000 !important;
+
+        b {
+            font-family: BarlowBold;
+            font-size: 14px;
+        }
+    }
+}
+
+button, input[type=file], .textoImagenAdjunto, .btnFinalizarCompra {
+    color: #fff !important;
+    text-transform: uppercase !important;
+    font-size: 12px !important;
+}
+
+input[type=file] {
+    background: #e37725 !important;
+}
+
+.swal2-popup .swal2-styled.swal2-confirm, .swal2-cancel.swal2-styled {
+    color: #000 !important;
+    text-transform: uppercase !important;
+    font-weight: 600;
+    font-family: BarlowBold;
+    outline: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+
+    &:hover, &:focus {
+        outline: 0 !important;
+        border: 0 !important;
+        box-shadow: none !important;
+    }
+}
+
+.swal2-confirm {
+    .swal2-styled.swal2-confirm {
+        border-bottom: 1px solid #000;
+    }
+}

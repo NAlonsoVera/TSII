@@ -1,0 +1,251 @@
+﻿body {
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+  /*   .btnAgregarCarrito {
+        border: 0 !important;
+        background-color: #E37725 !important;
+        color: #fff !important;
+        font-family: Barlow;
+        font-weight: 100;
+    }*/
+  /*.noo-woo-images-wrap {
+        .bx-wrapper {
+            .bx-viewport {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }*/
+  /*.info-image-product{
+        padding:20px;
+    }*/ }
+  body .contenido_video__video {
+    width: 100%;
+    height: 500px;
+    padding: 0; }
+  body .contenido_video__imagen {
+    width: 100%;
+    padding: 0; }
+  @media (max-width: 768px) {
+    body .contenido_video__video {
+      height: 370px; } }
+  @media (max-width: 576px) {
+    body .contenido_video__video {
+      height: 300px; } }
+  body .grid-45-55 {
+    grid-template-columns: 35% 45%; }
+  body .item__quantity__input__plus {
+    display: flex;
+    align-items: center; }
+    body .item__quantity__input__plus button {
+      height: 35px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #616D70;
+      cursor: pointer;
+      color: #616D70;
+      outline: 0; }
+    body .item__quantity__input__plus input {
+      padding: 10px 0 10px 10px;
+      width: 50px;
+      border: 0;
+      background-color: #F2F2F2;
+      text-align: center; }
+  body #ModalConfirmed {
+    padding: 0 !important; }
+    body #ModalConfirmed .modal-dialog {
+      width: 400px;
+      margin: 0 0 0 auto; }
+      body #ModalConfirmed .modal-dialog .modal-content {
+        border-radius: 0; }
+        body #ModalConfirmed .modal-dialog .modal-content .modal-header h5 {
+          font-family: Barlow;
+          font-weight: 600;
+          text-transform: uppercase; }
+          body #ModalConfirmed .modal-dialog .modal-content .modal-header h5 i {
+            margin-right: 10px; }
+  body .container {
+    /*margin-top: 20px;*/ }
+    body .container__title {
+      padding: 15px 200px; }
+      body .container__title h2 {
+        font-weight: 500; }
+      @media (max-width: 768px) {
+        body .container__title {
+          padding: 15px 25px; } }
+    body .container__body {
+      /*padding: 0 200px;*/ }
+      @media (max-width: 768px) {
+        body .container__body {
+          padding: 0 25px; } }
+      body .container__body .cart {
+        margin-bottom: 10px; }
+        body .container__body .cart .item {
+          padding: 15px 0; }
+          body .container__body .cart .item__img {
+            position: relative; }
+          body .container__body .cart .item__discount {
+            position: absolute;
+            bottom: 0;
+            right: 0; }
+            body .container__body .cart .item__discount span {
+              background: red;
+              color: white;
+              padding: 5px 8px; }
+          body .container__body .cart .item__info__description__primary, body .container__body .cart .item__info__description__sencondary {
+            display: block; }
+          body .container__body .cart .item__info__description__primary {
+            font-weight: bold;
+            font-size: 19px; }
+          body .container__body .cart .item__info__description__sencondary {
+            font-size: 15px; }
+          body .container__body .cart .item__info__option a {
+            font-size: 17px;
+            color: gray; }
+          body .container__body .cart .item__shopping__price__discount, body .container__body .cart .item__shopping__price__current {
+            display: block; }
+          body .container__body .cart .item__shopping__price__discount {
+            font-size: 15px;
+            text-decoration: line-through;
+            color: gray; }
+          body .container__body .cart .item__shopping__price__current {
+            font-weight: bold;
+            font-size: 19px; }
+          body .container__body .cart .item__shopping__info label {
+            font-size: 15px; }
+            body .container__body .cart .item__shopping__info label i {
+              color: green;
+              font-size: 21px; }
+          body .container__body .cart .item__quantity__input > input[type=number] {
+            max-width: 45px;
+            font-size: 15px;
+            text-align: center;
+            border-color: #6c757d;
+            -moz-appearance: textfield; }
+            body .container__body .cart .item__quantity__input > input[type=number]::-webkit-inner-spin-button, body .container__body .cart .item__quantity__input > input[type=number]::-webkit-outer-spin-button {
+              -webkit-appearance: none;
+              margin: 0; }
+      body .container__body .purchaseInfo {
+        border-top: solid 1px #ddd;
+        padding: 0 0 50px; }
+        body .container__body .purchaseInfo .row {
+          margin-left: 0;
+          margin-right: 0; }
+        body .container__body .purchaseInfo span.title, body .container__body .purchaseInfo span.subTitle {
+          display: block; }
+        body .container__body .purchaseInfo span.title {
+          margin: 0 0 5px;
+          font-size: 18px;
+          color: #444;
+          font-weight: 600; }
+        body .container__body .purchaseInfo span.subTitle {
+          font-size: 14px;
+          color: #444;
+          margin: 0 0 10px; }
+        body .container__body .purchaseInfo__collaterals, body .container__body .purchaseInfo__totals {
+          padding: 25px 2.5% 0 2.5%; }
+        body .container__body .purchaseInfo__collaterals__discountCode, body .container__body .purchaseInfo__collaterals__giftCards, body .container__body .purchaseInfo__collaterals__estimate {
+          margin: 0 0 20px; }
+          body .container__body .purchaseInfo__collaterals__discountCode label, body .container__body .purchaseInfo__collaterals__discountCode input, body .container__body .purchaseInfo__collaterals__discountCode select, body .container__body .purchaseInfo__collaterals__discountCode .btn, body .container__body .purchaseInfo__collaterals__giftCards label, body .container__body .purchaseInfo__collaterals__giftCards input, body .container__body .purchaseInfo__collaterals__giftCards select, body .container__body .purchaseInfo__collaterals__giftCards .btn, body .container__body .purchaseInfo__collaterals__estimate label, body .container__body .purchaseInfo__collaterals__estimate input, body .container__body .purchaseInfo__collaterals__estimate select, body .container__body .purchaseInfo__collaterals__estimate .btn {
+            font-size: 14px; }
+        body .container__body .purchaseInfo__totals {
+          background-color: #F9F9F9;
+          font-size: 14px; }
+          body .container__body .purchaseInfo__totals__info {
+            border-bottom: 1px solid #ddd;
+            padding: 5px 30px 15px;
+            margin: 0 0 20px; }
+            body .container__body .purchaseInfo__totals__info table {
+              width: 100%;
+              border-collapse: collapse; }
+              body .container__body .purchaseInfo__totals__info table tr td {
+                padding: 4px 0; }
+          body .container__body .purchaseInfo__totals__termOfService {
+            margin: 0 0 20px;
+            padding: 0 30px; }
+            body .container__body .purchaseInfo__totals__termOfService label {
+              display: initial; }
+          body .container__body .purchaseInfo__totals__checkOut button.btn {
+            padding: 10px 20px; }
+            @media (max-width: 768px) {
+              body .container__body .purchaseInfo__totals__checkOut button.btn {
+                font-size: 14px;
+                padding: 10px 15px; } }
+        body .container__body .purchaseInfo__security {
+          border: 2px solid #A9A9A9;
+          border-radius: 25px; }
+          body .container__body .purchaseInfo__security__payment {
+            font-size: 11px;
+            font-weight: bold;
+            padding: inherit;
+            max-width: 100%; }
+          body .container__body .purchaseInfo__security__SSL {
+            font-size: 10px;
+            color: lightslategray; }
+  body h6 {
+    font-family: Barlow;
+    font-style: normal;
+    font-size: 13px;
+    color: #3F3D44;
+    font-weight: 600; }
+  body h5 {
+    color: #3F3D44;
+    font-family: Barlow;
+    margin-bottom: 5px;
+    font-size: 17px; }
+  body .desktop-gallery-product {
+    background-color: #fff; }
+  body .bx-viewport {
+    height: 500px !important; }
+  body .easyzoom .small, body .easyzoom .big {
+    height: 500px !important; }
+  body .info-content-text {
+    height: 510px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative; }
+    body .info-content-text a {
+      position: absolute;
+      right: 25px; }
+      body .info-content-text a i {
+        font-size: 20px; }
+    body .info-content-text p {
+      font-size: 14px;
+      color: #616D70; }
+      body .info-content-text p.sub-title {
+        font-weight: 600; }
+  body ::-webkit-scrollbar {
+    width: 4px; }
+  body ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #fff;
+    border-radius: 0; }
+  body ::-webkit-scrollbar-thumb {
+    background: #C4C4C4;
+    border-radius: 0; }
+  body ::-webkit-scrollbar-thumb:hover {
+    background: transparent; }
+  body .image-product img {
+    width: 100px; }
+  body .item__quantity__input {
+    width: 395px; }
+  body .btnAgregarCarrito {
+    height: 35px;
+    background: #fff !important;
+    color: #616D70 !important;
+    font-size: 14px;
+    font-weight: 600;
+    outline: 0 !important;
+    border: 1px solid #616D70 !important; }
+    body .btnAgregarCarrito:hover, body .btnAgregarCarrito:focus {
+      outline: 0 !important; }
+  body .destacados .content {
+    max-width: 950px;
+    position: relative; }
+  body .destacados h3 {
+    color: #E37725;
+    font-family: Barlow; }
+    body .destacados h3:before, body .destacados h3:after {
+      content: ""; }
+  body .info-producto.border-image .content-image {
+    background-color: #FFF; }

@@ -1,0 +1,203 @@
+﻿.login-register-pago {
+    padding: 60px;
+
+    h3 {
+        font-family: Barlow;
+
+        &:before, &:after {
+            content: "";
+        }
+    }
+
+    .head-title-product {
+        margin-bottom: 30px;
+    }
+
+    .form-register-login {
+        max-width: 380px;
+        margin: 0 auto;
+
+        h5 {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-family: BarlowBold;
+        }
+
+        p {
+            font-weight: 500;
+            font-family: Barlow;
+            font-size: 14px;
+            margin: 15px 0 10px 0;
+        }
+
+        input {
+            background-color: #f2f2f2;
+            font-size: 13px;
+            margin: 6px 0;
+        }
+
+        .form-check-label {
+            a {
+                font-size: 13px;
+            }
+        }
+
+        button, a.btn {
+            border-radius: 0;
+            text-transform: uppercase;
+            margin: 10px 0;
+            font-size: 14px;
+
+            &.btn-register {
+                background: #fff !important;
+                color: #e37725;
+                border: 1px solid #e37725;
+            }
+        }
+    }
+}
+
+.content-product {
+    padding: 60px 0;
+
+    h5 {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-family: BarlowBold;
+        margin-bottom: 15px;
+    }
+
+    .content-info {
+        max-width: 820px;
+        margin: 0 auto;
+
+        .image-product {
+            img {
+                width: 100px;
+            }
+        }
+
+        .item__quantity__input__plus button {
+            padding: 5px !important
+        }
+
+        .item__quantity__input__plus input {
+            padding: 0px 0 0px 10px;
+            height: 30px;
+        }
+
+        h5 {
+            font-weight: 600;
+            font-family: Barlow;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .mobile-text {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .btnEliminar {
+            text-decoration: underline;
+            font-weight: 600;
+            font-family: Barlow;
+            font-size: 13px;
+            color: #000000 !important;
+        }
+    }
+}
+
+table {
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.item__quantity__input__plus {
+    display: flex;
+    align-items: center;
+
+    button {
+        padding: 10px;
+        background: #fff;
+        border: 1px solid #cecece;
+        cursor: pointer;
+        z-index:9;
+        display:none;
+    }
+
+    input {
+        padding: 10px 0 10px 10px;
+        width: 50px;
+        border: 0;
+        background-color: #F2F2F2;
+    }
+}
+
+
+
+#checkOut {
+    .iptCantidad {
+        border: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+
+    h5 {
+        margin-bottom: 10px;
+    }
+
+    p {
+        margin-bottom: 5px !important;
+
+        &.marca {
+            color: #616D70;
+            font-family: Barlow;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+    }
+
+    .cantidad-text {
+        color: #000;
+        font-family: Barlow;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    input {
+        color: #000 !important;
+        font-weight: 600;
+        font-size: 13px;
+        width: 50px;
+    }
+
+    .image-product img {
+        width: 100%;
+    }
+
+    .bottom-vertical {
+        align-items: center;
+        display: flex;
+
+        p {
+            color: #000;
+            font-weight: 600;
+            font-size: 13px;
+
+            &.text-igv {
+                color: #616D70;
+            }
+        }
+    }
+
+    .table th, .table td {
+        color: #000 !important;
+
+        b {
+            font-family: BarlowBold;
+            font-size: 14px;
+        }
+    }
+}

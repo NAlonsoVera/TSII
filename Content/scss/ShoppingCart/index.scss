@@ -1,0 +1,186 @@
+﻿.content-product {
+    padding: 50px 90px;
+
+    h3 {
+        font-family: Barlow;
+
+        &:before, &:after {
+            content: "";
+        }
+    }
+
+    .content-info {
+        max-width: 820px;
+        margin: 0 auto;
+
+        .image-product {
+            img {
+                width: 100%;
+            }
+        }
+
+        .item__quantity__input__plus button {
+            padding: 5px !important
+        }
+
+        .item__quantity__input__plus input {
+            padding: 0px 0 0px 10px;
+            height: 30px;
+        }
+
+        h5 {
+            font-weight: 600;
+            font-family: Barlow;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .mobile-text {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .btnEliminar {
+            text-decoration: underline;
+            font-weight: 600;
+            font-family: Barlow;
+            font-size: 13px;
+            color: #000000 !important;
+        }
+    }
+}
+
+.item__quantity__input__plus {
+    display: flex;
+    align-items: center;
+
+    button {
+        padding: 10px;
+        background: #fff;
+        border: 1px solid #616d70;
+        cursor: pointer;
+        color: #616d70;
+        outline: 0;
+    }
+
+    input {
+        padding: 10px 0 10px 10px;
+        width: 50px;
+        border: 0;
+        background-color: #F2F2F2;
+    }
+}
+
+#btnCheckOutFinish {
+    margin: 35px auto 0 auto;
+    width: 315px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 14px;
+    padding: 7px 0;
+    border-radius: 0;
+}
+
+.content-product {
+    h3 {
+        color: #E37725;
+        font-family: Barlow;
+        font-weight: 600
+    }
+}
+
+.carrito-vacios {
+    ul {
+        display: flex;
+        justify-content: center;
+        margin: 25px 0;
+
+        li {
+            margin: 0 30px;
+
+            a {
+                font-size: 16px;
+                font-family: Barlow;
+                font-weight: 600;
+                color: #16AC7D;
+            }
+        }
+    }
+}
+
+
+#checkOut {
+    .iptCantidad {
+        border: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+
+    h5 {
+        margin-bottom: 10px;
+    }
+
+    p {
+        margin-bottom: 5px !important;
+
+        &.marca {
+            color: #616D70;
+            font-family: Barlow;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+    }
+
+    .cantidad-text {
+        color: #000;
+        font-family: Barlow;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    input {
+        color: #000 !important;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    .image-product img {
+        width: 100%;
+    }
+
+    .bottom-vertical {
+        align-items: center;
+        display: flex;
+        height: 100% !important;
+
+        p {
+            color: #000;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: BarlowBold;
+
+            &.text-igv {
+                color: #616D70;
+            }
+        }
+    }
+
+    .table th, .table td {
+        color: #000 !important;
+
+        b {
+            font-family: BarlowBold;
+            font-size: 14px;
+        }
+    }
+
+    .vertical-center-table-text{
+        padding-top: 35px;
+    }
+}
+
+table {
+    text-transform: uppercase;
+    font-size: 13px;
+}

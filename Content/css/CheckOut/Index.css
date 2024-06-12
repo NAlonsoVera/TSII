@@ -1,0 +1,95 @@
+﻿.login-register-pago {
+  padding: 60px; }
+  .login-register-pago h3 {
+    font-family: Barlow; }
+    .login-register-pago h3:before, .login-register-pago h3:after {
+      content: ""; }
+  .login-register-pago .head-title-product {
+    margin-bottom: 30px; }
+  .login-register-pago .form-register-login {
+    max-width: 460px;
+    margin: 0 auto; }
+    .login-register-pago .form-register-login h5 {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-family: BarlowBold; }
+    .login-register-pago .form-register-login p {
+      font-weight: 500;
+      font-family: Barlow;
+      font-size: 14px;
+      margin: 15px 0 10px 0; }
+    .login-register-pago .form-register-login input {
+      background-color: #f2f2f2;
+      font-size: 13px;
+      margin: 6px 0; }
+
+#checkOut .iptCantidad {
+  border: 0;
+  text-align: center; }
+
+#checkOut h5 {
+  margin-bottom: 10px; }
+
+#checkOut p {
+  margin-bottom: 5px !important; }
+  #checkOut p.marca {
+    color: #616D70;
+    font-family: Barlow;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px; }
+
+#checkOut .cantidad-text {
+  color: #000;
+  font-family: Barlow;
+  font-weight: 600;
+  font-size: 13px; }
+
+#checkOut input {
+  color: #000 !important;
+  font-weight: 600;
+  font-size: 13px; }
+
+#checkOut .content-product .content-info .image-product img {
+  width: 100% !important; }
+
+#checkOut .bottom-vertical {
+  align-items: center;
+  display: flex; }
+  #checkOut .bottom-vertical p {
+    color: #000;
+    font-weight: 600;
+    font-size: 13px; }
+    #checkOut .bottom-vertical p.text-igv {
+      color: #616D70; }
+
+#checkOut .table th, #checkOut .table td {
+  color: #000 !important; }
+  #checkOut .table th b, #checkOut .table td b {
+    font-family: BarlowBold;
+    font-size: 14px; }
+
+button, input[type=file], .textoImagenAdjunto, .btnFinalizarCompra {
+  color: #fff !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important; }
+
+input[type=file] {
+  background: #e37725 !important; }
+
+.swal2-popup .swal2-styled.swal2-confirm, .swal2-cancel.swal2-styled {
+  color: #000 !important;
+  text-transform: uppercase !important;
+  font-weight: 600;
+  font-family: BarlowBold;
+  outline: 0 !important;
+  border: 0 !important;
+  background: #fff !important;
+  box-shadow: none !important; }
+  .swal2-popup .swal2-styled.swal2-confirm:hover, .swal2-popup .swal2-styled.swal2-confirm:focus, .swal2-cancel.swal2-styled:hover, .swal2-cancel.swal2-styled:focus {
+    outline: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important; }
+
+.swal2-confirm .swal2-styled.swal2-confirm {
+  border-bottom: 1px solid #000; }
