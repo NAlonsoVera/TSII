@@ -67,15 +67,17 @@ function login() {
     $.ajax({
         url: 'controllers/LoginController.php',
         type: 'POST',
-       async: false,
+        async: false,
         data: {
             username: username,
             password: password
         },
         success: function(response) {
-            console.log('Login successful:', response);
-            if (response.includes('success')) {  // Verificar si la respuesta incluye la palabra 'success'
-                window.location.href = 'views/Layout.php'; // Redirigir al usuario a Layout.php
+            console.log('Login response:', response);
+            if (response.includes('success-admin')) { 
+                window.location.href = 'views/Layout.php'; // Admin layout
+            } else if (response.includes('success-user')) {
+                window.location.href = 'views/LayoutGeneral.php'; // General user layout
             } else {
                 alert('Acceso denegado');  // Mostrar un mensaje de error si el acceso es denegado
             }
@@ -85,6 +87,7 @@ function login() {
         }
     });
 }
+
 
 </script>
 </body>

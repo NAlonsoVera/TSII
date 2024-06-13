@@ -173,7 +173,7 @@ function register() {
         error = true;
     }
 
-
+    if (!error) {
     $.ajax({
         url: '/tf/controllers/Cliente/RegistrarCliente.php',
         type: 'POST',
@@ -189,13 +189,14 @@ function register() {
         },
         success: function(response) {
             console.log('Registro exitoso:', response);
-            alert('Registro completado exitosamente.');
+           // alert('Registro completado exitosamente.');
         },
         error: function(xhr) {
             console.error('Error de registro:', xhr.responseText);
             //alert('Error al registrar.');
         }
     });
+}
 }
 </script>
 </body>

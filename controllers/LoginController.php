@@ -16,7 +16,7 @@ if ($result->num_rows > 0) {
         if ($password_user === $row['cPassword']) {
             session_start();
             $_SESSION['session_email'] = $email; 
-            echo 'success';  // Respuesta para éxito de login
+            echo 'success-admin';  // Respuesta para éxito de login de administrador
         } else {
             echo 'error';  // Respuesta para error de login
         }
@@ -25,7 +25,7 @@ if ($result->num_rows > 0) {
         if (password_verify($password_user, $row['cPassword'])) {
             session_start();
             $_SESSION['session_email'] = $email;
-            echo 'success';
+            echo 'success-user'; // Respuesta para éxito de login de usuario
         } else {
             echo 'error';
         }
