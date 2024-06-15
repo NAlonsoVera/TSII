@@ -118,7 +118,7 @@
 				<!-- Sidebar Menu -->
 				<ul class="sidebar-menu">
 					<li class="header">Menu</li>
-					<li><a href="/Productos"><i class="fa fa-product-hunt"></i> <span>PRODUCTOS</span></a></li>
+					<li><a href="../views/Producto.php"><i class="fa fa-product-hunt"></i> <span>PRODUCTOS</span></a></li>
 					<li><a href="/Clientes"><i class="fa fa-users"></i> <span>CLIENTES</span></a></li>
 					<li><a href="/Ventas"><i class="fa fa-shopping-cart"></i> <span>VENTAS</span></a></li>
 				</ul>
