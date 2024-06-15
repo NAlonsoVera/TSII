@@ -1,6 +1,5 @@
 <?php
 include('../administrador/config/bd.php');
-
 $email = $_POST['username'];
 $password_user = $_POST['password'];
 $sql = "SELECT * FROM usuario WHERE cCorreo = '".$email."'";

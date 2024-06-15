@@ -79,11 +79,11 @@ function login() {
             } else if (response.includes('success-user')) {
                 window.location.href = 'views/LayoutGeneral.php'; // General user layout
             } else {
-                alert('Acceso denegado');  // Mostrar un mensaje de error si el acceso es denegado
+                alert('Acceso denegado');  
             }
         },
         error: function(xhr) {
-            console.error('Login failed:', xhr.responseText);  // Manejar errores de la solicitud
+            console.error('Login failed:', xhr.responseText);  
         }
     });
 }
