@@ -194,8 +194,8 @@
 								
                                 <div class="col-sm-12 text-right">
                                     <div class="panel-body buttons-margin">
-									<button onclick="guardar_form()" id="btnGuardar" class="btn btn-w-md btn-success">Guardar</button>
-									<button onclick="cancelar_form()" id="btnCancelar" class="btn btn-w-md btn-warning">Cancelar</button>
+									<button type="button" onclick="guardar_form()" id="btnGuardar" class="btn btn-w-md btn-success">Guardar</button>
+									<button type="button" onclick="cancelar_form()" id="btnCancelar" class="btn btn-w-md btn-warning">Cancelar</button>
                                     </div>
                                 </div>
                             </form>
@@ -324,18 +324,24 @@ function guardar_form() {
         type: "POST",
         url: '/tf/controllers/Producto/AgregarProducto.php',
         data: formData,
+		async:false,
         contentType: false, // Necesario para el tipo de contenido multipart/form-data
         processData: false, // Necesario para evitar que jQuery transforme los datos del formulario
-        success: function (result) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Registro de Productos',
-                text: result
-            });
-            cancelar_form();
-            cargaProductos();
-        },
-        error: function (xhr, status, error) {
+		success: function (result) {
+    		Swal.fire({
+					icon: 'success',
+					title: 'Registro de Productos',
+					text: result,
+					showConfirmButton: true,
+					confirmButtonText: 'Aceptar'
+				}).then((result) => {
+					if (result.value) {
+						cancelar_form();
+						cargaProductos();
+					}
+				});
+			},
+			error: function (xhr, status, error) {
             console.error("Error al guardar: " + error);
         }
     });
@@ -353,7 +359,7 @@ function cargaProductos() {
             } else {
                 console.error("La tabla no está inicializada.");
             }
-        },
+        },	
         error: function() {
             alert('No se pudo cargar la información de los productos');
         }

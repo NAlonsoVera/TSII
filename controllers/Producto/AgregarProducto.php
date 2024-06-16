@@ -14,11 +14,9 @@ $conn = conectar();
 $sql = "INSERT INTO producto (fkCategoria, Producto, Descripcion, Precio, Stock, Imagen) VALUES ('".$categoria."', '".$producto."', '".$descripcion."', '".$precio."', '".$stock."', '".$imagen."')";
 $result = mysqli_query($conn, $sql);
 
-if($result) {
-    echo 'Producto registrado correctamente';
-} else {
-    echo 'Error al registrar el producto: '.mysqli_error($conn);
-}
+$msg = 'Producto '.$producto.' registrado';
 
 desconectar($conn);
+
+echo $msg;
 ?>
