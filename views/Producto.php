@@ -9,7 +9,6 @@
 	<link rel="icon" type="image/png" href="../Content/image/masterinpetslogo.png">
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta name="viewport" content="initial-scale=1.0, target-densitydpi=device-dpi" />
 	<!-- Bootstrap 3.3.6 -->
 	<link href="../Content/plugins/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="../Content/plugins/Boostrap.Responsive/responsive.bootstrap.min.css" rel="stylesheet" />
@@ -17,6 +16,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!--Sweetalert-->
     <link href="../Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+	<link href="../Content/plugins/sweetalert2/sweetalert2.css" rel="stylesheet" />
+
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -46,6 +47,21 @@
 			img.src = ruta;
 		}
 	</script>
+	  <style>
+        .error-message {
+            color: red;
+            display: none;
+            font-size: 0.8em;
+        }
+        .container-center {
+            max-width: 60%; 
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -144,26 +160,42 @@
                     <div class="panel panel-filled">
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-sm-12"><h5 class="m-t-xs">Ingreso de Alumno</h5></div>
+                                <div class="col-sm-12"><h5 class="m-t-xs">Ingreso de producto	</h5></div>
                             </div>
-                            <form id="alumnoForm">
+                            <form id="alumnoForm" method="post" enctype="multipart/form-data">
                                 <input type="hidden" id="student_id" value="">
                                 <div class="form-group">
-                                    <label>Nombres</label>
-                                    <input type="text" class="form-control" placeholder="Ingresar Nombres" id="nombres">
+                                    <label>Producto</label>
+                                    <input  type="text" class="form-control" placeholder="Ingresar nombre del producto" id="producto" name="producto">
+									<span class="error-message">Campo obligatorio</span>
+                                </div>
+								<div class="form-group">
+								<label>Categoría</label>
+								<select id="categoria" class="form-control select2" style="width: 100%;" name="categoria">
+									<!-- Las opciones se cargarán aquí -->
+								</select>
+								</div>
+                                <div class="form-group">
+                                    <label>Descripción</label>
+                                    <input type="text" class="form-control" placeholder="Ingresar descripción" id="descripcion" name="descripcion">
+									<span class="error-message">Campo obligatorio</span>	
                                 </div>
                                 <div class="form-group">
-                                    <label>Apellido Paterno</label>
-                                    <input type="text" class="form-control" placeholder="Ingresar Apellido Paterno" id="ape_paterno">
+                                    <label>Precio</label>
+                                    <input type="text" class="form-control" placeholder="Ingresar el precio" id="precio" name="precio">
+									<span class="error-message">Campo obligatorio</span>
                                 </div>
-                                <div class="form-group">
-                                    <label>Apellido Materno</label>
-                                    <input type="text" class="form-control" placeholder="Ingresar Apellido Materno" id="ape_materno">
+								<div class="form-group">
+                                    <label>Stock</label>
+                                    <input type="number" class="form-control" placeholder="Ingresar el stock" id="stock"  name="stock">
+									<span class="error-message">Campo obligatorio</span>
                                 </div>
+								<input type="file" name="image" id="image">
+								
                                 <div class="col-sm-12 text-right">
                                     <div class="panel-body buttons-margin">
-                                        <a href="javascript:guardar_form()" id="btnGuardar" class="btn btn-w-md btn-success">Guardar</a>
-                                        <a href="javascript:cancelar_form()" id="btnCancelar" class="btn btn-w-md btn-warning">Cancelar</a>
+									<button onclick="guardar_form()" id="btnGuardar" class="btn btn-w-md btn-success">Guardar</button>
+									<button onclick="cancelar_form()" id="btnCancelar" class="btn btn-w-md btn-warning">Cancelar</button>
                                     </div>
                                 </div>
                             </form>
@@ -174,7 +206,7 @@
 
 
             <div class= "card-body" id ="ListaProductos">
-                <button href="javascript:ver_form()" type="button" class="btn btn-primary btn-sm pull-right" id="btnNuevoCliente" fdprocessedid="2hrh4">
+                <button onclick="ver_form()" type="button" class="btn btn-primary btn-sm pull-right" id="btnNuevoCliente" fdprocessedid="2hrh4">
                             <span class="fa fa-plus"></span> Nuevo Producto
                         </button>
                 <table id="productosTable" class="table table-bordered table-hover">
@@ -216,6 +248,8 @@
 	<!-- Bootstrap 3.3.6 -->
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
 	<script src="../Content/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- Jquery Validation -->
 	<script src="../Content/plugins/Jquery.Validation/jquery.validate.min.js"></script>
@@ -234,6 +268,8 @@
 	<script src="../Content/plugins/Boostrap.Notify/bootstrap-notify.min.js"></script>
 	<!--sweetalert-->
 	<script src="../Content/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="../Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
 	<!-- iCheck -->
 	<script src="../Content/plugins/iCheck/icheck.min.js"></script>
 	<!--Helper de Format Date-->
@@ -243,9 +279,23 @@
 	<script src="../Content/plugins/Intense/intense.js"></script>
 	<!--SlimScroll-->
 	<script src="../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <script>
+	<script>
+var table;  // Declaración global de la variable table
+
 $(document).ready(function () {
-    var table = $('#productosTable').DataTable({
+    $('.select2').select2();
+    $.ajax({
+        url: '../controllers/Categoria/ListaCategorias.php',
+        type: 'GET',
+        success: function(data) {
+            $('#categoria').html(data);
+        },
+        error: function() {
+            alert('Error al cargar las categorías');
+        }
+    });
+
+    table = $('#productosTable').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         },
@@ -253,34 +303,63 @@ $(document).ready(function () {
     });
 
     cargaProductos();
-
-    $('#btnNuevoCliente').on('click', function() {
-        ver_form();
-    });
-
-    function cargaProductos() {
-        $.ajax({
-            type: "POST",
-            url: "../controllers/Producto/ListaProductos.php",
-            success: function(data) {
-                table.clear().draw();
-                table.rows.add($(data)).draw();
-            },
-            error: function() {
-                alert('No se pudo cargar la información de los productos');
-            }
-        });
-    }
-
-    function ver_form() {
-        console.log('Botón Nuevo Producto presionado');
-        $("#ListaProductos").hide();
-        $("#form").show();
-        
-    }
 });
 
+function ver_form() {
+    console.log('Botón Nuevo Producto presionado');
+    $("#ListaProductos").hide();
+    $("#form").show();
+}
 
+function cancelar_form(){
+    $("#form").hide();
+    $("#ListaProductos").show();
+}
+
+function guardar_form() {
+    var form = $('#alumnoForm')[0]; // Necesitas obtener el formulario como elemento DOM
+    var formData = new FormData(form); // Usar FormData para manejar los archivos correctamente
+
+    $.ajax({
+        type: "POST",
+        url: '/tf/controllers/Producto/AgregarProducto.php',
+        data: formData,
+        contentType: false, // Necesario para el tipo de contenido multipart/form-data
+        processData: false, // Necesario para evitar que jQuery transforme los datos del formulario
+        success: function (result) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro de Productos',
+                text: result
+            });
+            cancelar_form();
+            cargaProductos();
+        },
+        error: function (xhr, status, error) {
+            console.error("Error al guardar: " + error);
+        }
+    });
+}
+
+
+function cargaProductos() {
+    $.ajax({
+        type: "POST",
+        url: "../controllers/Producto/ListaProductos.php",
+        success: function(data) {
+            if (table) {
+                table.clear().draw();
+                table.rows.add($(data)).draw();
+            } else {
+                console.error("La tabla no está inicializada.");
+            }
+        },
+        error: function() {
+            alert('No se pudo cargar la información de los productos');
+        }
+    });
+}
 </script>
+
 </body>
 </html>
