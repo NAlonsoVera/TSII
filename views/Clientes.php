@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,7 +9,6 @@
 	<link rel="icon" type="image/png" href="../Content/image/masterinpetslogo.png">
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta name="viewport" content="initial-scale=1.0, target-densitydpi=device-dpi" />
 	<!-- Bootstrap 3.3.6 -->
 	<link href="../Content/plugins/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="../Content/plugins/Boostrap.Responsive/responsive.bootstrap.min.css" rel="stylesheet" />
@@ -18,6 +16,14 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!--Sweetalert-->
     <link href="../Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+	<link href="../Content/plugins/sweetalert2/sweetalert2.css" rel="stylesheet" />
+
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
     <!-- Theme style -->
 	<link href="../Content/plugins/select2/css/select2.min.css" rel="stylesheet" />
 	<link href="../Content/adminLTE/adminLTE/css/AdminLTE.min.css?v=@DateTime.Now.Ticks.ToString()?v=@DateTime.Now.Ticks.ToString()" rel="stylesheet" />
@@ -41,6 +47,21 @@
 			img.src = ruta;
 		}
 	</script>
+	  <style>
+        .error-message {
+            color: red;
+            display: none;
+            font-size: 0.8em;
+        }
+        .container-center {
+            max-width: 60%; 
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -119,11 +140,12 @@
 				<ul class="sidebar-menu">
 					<li class="header">Menu</li>
 					<li><a href="../views/Producto.php"><i class="fa fa-product-hunt"></i> <span>PRODUCTOS</span></a></li>
-					<li><a href="../views/Clientes.php"><i class="fa fa-users"></i> <span>CLIENTES</span></a></li>
+					<li class="active"><a href="../views/Clientes.php"><i class="fa fa-users"></i> <span>CLIENTES</span></a></li>
 					<li><a href="/Ventas"><i class="fa fa-shopping-cart"></i> <span>VENTAS</span></a></li>
 				</ul>
 				<!-- /.sidebar-menu -->
 			</section>
+            
 			<!-- /.sidebar -->
 		</aside>
 		
@@ -131,9 +153,32 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section id="section-header" class="content-header">
-				<h1 id="h1-titulo">
-						<small>DASHBOARD</small>
-				</h1>
+            <div class="container-fluid">
+                <br>
+        <h2>Clientes</h2>
+       
+            <div class= "card-body" id ="ListaProductos">
+               
+                <table id="productosTable" class="table table-bordered table-hover">
+				<div class="form-group" id="indice" style="display:none;">
+									<label>Id</label>
+									<input type="text" class="form-control" id="id" disabled >
+								</div>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+							<th>Dirección</th>
+                        </tr>
+                    </thead>
+					<tbody id="datos">
+					<!-- Los datos se cargarán aquí mediante AJAX -->
+                    </tbody>
+                </table>
+				
+        </div>
 			</section>
 
 			<!-- Main content -->
@@ -155,6 +200,10 @@
 	<!-- ./wrapper -->
 	<!-- REQUIRED JS SCRIPTS -->
 	<!-- Bootstrap 3.3.6 -->
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
 	<script src="../Content/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- Jquery Validation -->
 	<script src="../Content/plugins/Jquery.Validation/jquery.validate.min.js"></script>
@@ -173,6 +222,8 @@
 	<script src="../Content/plugins/Boostrap.Notify/bootstrap-notify.min.js"></script>
 	<!--sweetalert-->
 	<script src="../Content/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="../Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
 	<!-- iCheck -->
 	<script src="../Content/plugins/iCheck/icheck.min.js"></script>
 	<!--Helper de Format Date-->
@@ -182,8 +233,103 @@
 	<script src="../Content/plugins/Intense/intense.js"></script>
 	<!--SlimScroll-->
 	<script src="../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- Section Scripts -->
-	<!-- Script General  -->
-	
+	<script>
+var table;  // Declaración global de la variable table
+var valor, editar = 0; 
+$(document).ready(function () {
+	table = $('#productosTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+        },
+        "pageLength": 10
+    });
+    cargarClientes();
+});
+
+function ver_form() {
+    console.log('Botón Nuevo Producto presionado');
+    $("#ListaProductos").hide();
+    $("#form").show();
+}
+
+function cancelar_form(){
+    $("#form").hide();
+    $("#ListaProductos").show();
+}
+
+function eliminar_form(id){
+   
+   $.ajax({ type:"POST",
+			url: "/tf/controllers/Cliente/EliminarCliente.php", 
+				async: false,
+			data:{id:id},
+				success: function(result){
+		   valor = result.substring(2,result.length);
+	   
+	   }});
+	   
+   Swal.fire({
+		 icon: 'ok',
+		 title: 'Eliminacion de Alumno',
+		 text: valor
+	   });
+	   
+   carga_datos();
+
+}
+
+
+
+function guardar_form() {
+    var form = $('#alumnoForm')[0]; // Necesitas obtener el formulario como elemento DOM
+    var formData = new FormData(form); // Usar FormData para manejar los archivos correctamente
+
+    $.ajax({
+        type: "POST",
+        url: '/tf/controllers/Producto/AgregarProducto.php',
+        data: formData,
+		async:false,
+        contentType: false, // Necesario para el tipo de contenido multipart/form-data
+        processData: false, // Necesario para evitar que jQuery transforme los datos del formulario
+		success: function (result) {
+    		Swal.fire({
+					icon: 'success',
+					title: 'Registro de Productos',
+					text: result,
+					showConfirmButton: true,
+					confirmButtonText: 'Aceptar'
+				}).then((result) => {
+					if (result.value) {
+						cancelar_form();
+						cargaProductos();
+					}
+				});
+			},
+			error: function (xhr, status, error) {
+            console.error("Error al guardar: " + error);
+        }
+    });
+}
+
+
+function cargarClientes(){
+		
+		$.ajax({ type:"POST",
+		         url: "/tf/controllers/Cliente/ListarClientes.php", 
+                     async: false,
+					 success: function(data) {
+            if (table) {
+                table.clear().draw();
+                table.rows.add($(data)).draw();
+            } else {
+                console.error("La tabla no está inicializada.");
+            }
+        },	
+        error: function() {
+            alert('No se pudo cargar la información de los productos');
+        }});
+   }
+</script>
+
 </body>
 </html>
