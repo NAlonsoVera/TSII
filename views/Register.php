@@ -189,6 +189,7 @@ function register() {
         },
         success: function(response) {
             console.log('Registro exitoso:', response);
+            window.location.href = 'LayoutGeneral.php';
            // alert('Registro completado exitosamente.');
         },
         error: function(xhr) {
