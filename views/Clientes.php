@@ -171,6 +171,7 @@
                             <th>Correo</th>
                             <th>Teléfono</th>
 							<th>Dirección</th>
+							<th>Acciones</th>
                         </tr>
                     </thead>
 					<tbody id="datos">
@@ -237,25 +238,16 @@
 var table;  // Declaración global de la variable table
 var valor, editar = 0; 
 $(document).ready(function () {
-	table = $('#productosTable').DataTable({
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-        },
-        "pageLength": 10
-    });
+
     cargarClientes();
 });
 
-function ver_form() {
-    console.log('Botón Nuevo Producto presionado');
-    $("#ListaProductos").hide();
-    $("#form").show();
-}
 
 function cancelar_form(){
-    $("#form").hide();
-    $("#ListaProductos").show();
-}
+		document.getElementById("form").style.display = "none";
+		document.getElementById("ListaProductos").style.display = "block";
+   }
+
 
 function eliminar_form(id){
    
@@ -265,70 +257,32 @@ function eliminar_form(id){
 			data:{id:id},
 				success: function(result){
 		   valor = result.substring(2,result.length);
-	   
 	   }});
-	   
    Swal.fire({
 		 icon: 'ok',
 		 title: 'Eliminacion de Alumno',
 		 text: valor
 	   });
-	   
-   carga_datos();
-
+	   cargarClientes1();
 }
-
-
-
-function guardar_form() {
-    var form = $('#alumnoForm')[0]; // Necesitas obtener el formulario como elemento DOM
-    var formData = new FormData(form); // Usar FormData para manejar los archivos correctamente
-
-    $.ajax({
+   function cargarClientes(){
+    $.ajax({ 
         type: "POST",
-        url: '/tf/controllers/Producto/AgregarProducto.php',
-        data: formData,
-		async:false,
-        contentType: false, // Necesario para el tipo de contenido multipart/form-data
-        processData: false, // Necesario para evitar que jQuery transforme los datos del formulario
-		success: function (result) {
-    		Swal.fire({
-					icon: 'success',
-					title: 'Registro de Productos',
-					text: result,
-					showConfirmButton: true,
-					confirmButtonText: 'Aceptar'
-				}).then((result) => {
-					if (result.value) {
-						cancelar_form();
-						cargaProductos();
-					}
-				});
-			},
-			error: function (xhr, status, error) {
-            console.error("Error al guardar: " + error);
+        url: "/tf/controllers/Cliente/ListarClientes.php", 
+        async: false,
+        success: function(data) {
+                valor = data.split(',');
+                document.getElementById("datos").innerHTML = valor[0];
+
+        },
+        error: function() {
+            alert('No se pudo cargar la información de los productos');
         }
     });
 }
 
 
-function cargarClientes(){
-		
-		$.ajax({ type:"POST",
-		         url: "/tf/controllers/Cliente/ListarClientes.php", 
-                     async: false,
-					 success: function(data) {
-            if (table) {
-                table.clear().draw();
-                table.rows.add($(data)).draw();
-            } else {
-                console.error("La tabla no está inicializada.");
-            }
-        },	
-        error: function() {
-            alert('No se pudo cargar la información de los productos');
-        }});
-   }
+
 </script>
 
 </body>

@@ -163,7 +163,10 @@
                                 <div class="col-sm-12"><h5 class="m-t-xs">Ingreso de producto	</h5></div>
                             </div>
                             <form id="alumnoForm" method="post" enctype="multipart/form-data">
-                                <input type="hidden" id="student_id" value="">
+								<div class="form-group" id="indice" style="display:none;">
+									<label>Id</label>
+									<input type="text" class="form-control" id="id" disabled >
+								</div>
                                 <div class="form-group">
                                     <label>Producto</label>
                                     <input  type="text" class="form-control" placeholder="Ingresar nombre del producto" id="producto" name="producto">
@@ -191,10 +194,15 @@
 									<span class="error-message">Campo obligatorio</span>
                                 </div>
 								<input type="file" name="image" id="image">
-								
+								<div class="form-group">
+									<label>Imagen actual:</label>
+									<img id="imagePreview" src="" alt="Imagen actual" style="width: 100px; height: auto;">
+									<span id="imageLabel"></span>
+								</div>
+
                                 <div class="col-sm-12 text-right">
                                     <div class="panel-body buttons-margin">
-									<button type="button" onclick="guardar_form()" id="btnGuardar" class="btn btn-w-md btn-success">Guardar</button>
+									<button type="button" onclick="guardar()" id="btnGuardar" class="btn btn-w-md btn-success">Guardar</button>
 									<button type="button" onclick="cancelar_form()" id="btnCancelar" class="btn btn-w-md btn-warning">Cancelar</button>
                                     </div>
                                 </div>
@@ -217,6 +225,7 @@
                             <th>Descripción</th>
                             <th>Precio</th>
                             <th>Stock</th>
+							<th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -280,7 +289,8 @@
 	<!--SlimScroll-->
 	<script src="../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<script>
-var table;  // Declaración global de la variable table
+var table;  
+var valor, editar = 0; 
 
 $(document).ready(function () {
     $('.select2').select2();
@@ -294,39 +304,144 @@ $(document).ready(function () {
             alert('Error al cargar las categorías');
         }
     });
-
     table = $('#productosTable').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         },
         "pageLength": 10
     });
-
     cargaProductos();
 });
 
-function ver_form() {
-    console.log('Botón Nuevo Producto presionado');
-    $("#ListaProductos").hide();
-    $("#form").show();
+function guardar() {
+    if (editar == 0) {
+        guardar_form();  
+    } else {
+        actualizar_form(); 
+        editar = 0; 
+    }
 }
 
-function cancelar_form(){
-    $("#form").hide();
-    $("#ListaProductos").show();
+function eliminar_form(id){
+		$.ajax({ type:"POST",
+		         url: '../controllers/Producto/EliminarProducto.php',
+                     async: false,
+				 data:{id:id},
+				     success: function(result){
+                valor = result.substring(2,result.length);
+            }});
+		Swal.fire({
+			  icon: 'ok',
+			  title: 'Eliminacion de Producto',
+			  text: valor
+			});
+		
+			cargaProductos();
+   
+   }
+
+
+function ver_form(i) {
+    document.getElementById("id").value = "";
+    $('#producto').val("");
+    $('#descripcion').val("");
+    $('#precio').val("");
+    $('#stock').val("");
+    $('#categoria').val(null).trigger('change'); 
+    $('#image').val(''); 
+    $('#imagePreview').attr('src', '../Content/image/blank_image.png'); 
+    $('#imageLabel').text(''); 
+
+    document.getElementById("form").style.display = "block";
+    document.getElementById("ListaProductos").style.display = "none";
+
+    if (i == 1) {
+        document.getElementById("indice").style.display = "block";
+    } else {
+        document.getElementById("indice").style.display = "none";
+    }
 }
 
+function cancelar_form() {
+    document.getElementById("form").style.display = "none";
+    document.getElementById("ListaProductos").style.display = "block";
+    editar = 0;  
+}
+
+
+function editar_form(id) {
+    ver_form(1);  
+    editar = 1;   
+
+    $.ajax({
+        type: "POST",
+        url: "/tf/controllers/Producto/EditarProducto.php",
+        data: { id: id },
+        success: function(response) {
+            var datos = response.split(',');
+			console.log(datos); 
+            if (datos.length === 6) {
+                document.getElementById("id").value = id;
+                $('#producto').val(datos[0]);
+                $('#descripcion').val(datos[1]);
+                $('#precio').val(datos[2]);
+                $('#stock').val(datos[3]);
+                $('#categoria').val(datos[4]).trigger('change');
+				var imagePath = '.././img/' + datos[5];
+                $('#imagePreview').attr('src', imagePath);  
+                $('#imageLabel').text('Imagen actual: ' + datos[5]);  
+            } else {
+                alert("Error al cargar los datos del producto.");
+            }
+        },
+        error: function() {
+            alert("Error al cargar los datos del producto.");
+        }
+    });
+}
+
+
+function actualizar_form() {
+    var form = $('#alumnoForm')[0]; 
+    var formData = new FormData(form);
+    formData.append('id', $('#id').val());
+    $.ajax({
+        type: "POST",
+        url: '/tf/controllers/Producto/ActualizarProducto.php', 
+        data: formData,
+    processData: false,
+    contentType: false,
+    success: function(response) {
+        console.log(response);  
+        Swal.fire({
+            icon: 'success',
+            title: 'Producto Actualizado',
+            text: response
+        });
+    },
+    error: function(xhr, status, error) {
+        console.error("Error al actualizar: " + xhr.responseText);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudo actualizar el producto.'
+        });
+    }
+});
+						cancelar_form();
+						cargaProductos();
+}
 function guardar_form() {
-    var form = $('#alumnoForm')[0]; // Necesitas obtener el formulario como elemento DOM
-    var formData = new FormData(form); // Usar FormData para manejar los archivos correctamente
+    var form = $('#alumnoForm')[0]; 
+    var formData = new FormData(form); 
 
     $.ajax({
         type: "POST",
         url: '/tf/controllers/Producto/AgregarProducto.php',
         data: formData,
 		async:false,
-        contentType: false, // Necesario para el tipo de contenido multipart/form-data
-        processData: false, // Necesario para evitar que jQuery transforme los datos del formulario
+        contentType: false, 
+        processData: false, 
 		success: function (result) {
     		Swal.fire({
 					icon: 'success',
@@ -346,8 +461,6 @@ function guardar_form() {
         }
     });
 }
-
-
 function cargaProductos() {
     $.ajax({
         type: "POST",
@@ -366,6 +479,5 @@ function cargaProductos() {
     });
 }
 </script>
-
 </body>
 </html>
