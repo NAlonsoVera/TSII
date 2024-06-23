@@ -16,18 +16,25 @@ $sqlUsuario = "INSERT INTO Usuario (fkRol, cNombre, cCorreo, cPassword) VALUES (
 if (mysqli_query($conn, $sqlUsuario)) {
     $userId = mysqli_insert_id($conn);  
 
-   
+
     $sqlCliente = "INSERT INTO Cliente (fkUsuario, cDNI, cNombre, cApellido, cCorreo, cTelefono, cDireccion) 
                    VALUES ('$userId', '$dni', '$nombres', '$apellido', '$correo', '$telefono', '$direccion')";
-    if (mysqli_query($conn, $sqlCliente)) {
-        $msg = "Usuario y cliente registrados exitosamente.";
-    } else {
-        $msg = "Error al registrar en Cliente: " . mysqli_error($conn);
-    }
-} else {
-    $msg = "Error al registrar en Usuario: " . mysqli_error($conn);
-}
 
+    if (mysqli_query($conn, $sqlCliente)) {
+    $clienteId = mysqli_insert_id($conn);  
+
+        $sqlCarrito = "INSERT INTO carrito (fkCliente) VALUES ('$clienteId')";
+        if (mysqli_query($conn, $sqlCarrito)) {
+            $msg = "Usuario, cliente y carrito registrados exitosamente.";
+        } else {
+            $msg = "Error al registrar en Carrito: " . mysqli_error($conn);
+        }
+                    } else {
+                        $msg = "Error al registrar en Cliente: " . mysqli_error($conn);
+                    }
+} else {
+$msg = "Error al registrar en Usuario: " . mysqli_error($conn);
+}
 desconectar($conn);
 
 

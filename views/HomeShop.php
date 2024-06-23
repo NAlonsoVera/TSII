@@ -24,10 +24,10 @@ session_start();  // Asegurarse de iniciar la sesión
     <link rel="icon" type="image/png" href="~/Content/favicon.ico">
     <!-- CSS -->
     <link rel="stylesheet" href="../Content/fonts/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../Content/js/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="../Content/js/owl-carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="../Content/plugins/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../Content/plugins/jquery.dlmenu/component.css" />
+    <link rel="stylesheet" href="../Content/js/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="../Content/js/owl-carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="../Content/css/app.min.css">
     <link rel="stylesheet" href="../Content/css/_responsive.min.css">
     <link rel="stylesheet" href="../Content/plugins/sweetalert2/sweetalert2.css" />
@@ -46,11 +46,6 @@ session_start();  // Asegurarse de iniciar la sesión
     </style>
     <style type="text/css">
         
-        .carousel-item img {
-        height: 500px; /* Establece la altura que desees */
-        object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
-        width: 100%; /* Mantiene el ancho al 100% */
-    }
         .input-group {
             display: flex;
             align-items: center;
@@ -125,7 +120,6 @@ session_start();  // Asegurarse de iniciar la sesión
 
     <link rel="stylesheet" href="../Content/plugins/Jquery.CustomScrollBar/jquery.mCustomScrollbar.css">
 
-    <script type="text/javascript" src="../Content/js/LoginGoogle.min.js?v=@DateTime.Now.Ticks.ToString()"></script>
        
 
  
@@ -171,18 +165,7 @@ session_start();  // Asegurarse de iniciar la sesión
 
                 <ul id="menuMobile" class="@(Request.Url.AbsoluteUri.Contains("Perfil") ? "menu-not-mobile" : "nav-not-mobile")">
                     <li class="nav_mobile"><img src="../Content/image/icons/svg/nav.svg" alt="Navegación" /></li>
-                    <li>
-    <?php if(isset($_SESSION['name'])): ?>
-        <a href="/Perfil" class="account-text" title="Mi Perfil">
-            <?= $_SESSION['name'] ?> <i class="fa fa-user-circle-o"></i>
-        </a>
-    <?php else: ?>
-        <a href="/Login/Index" class="account-text" title="Mi Cuenta">
-            Mi Cuenta <i class="fa fa-user-circle-o"></i>
-        </a>
-    <?php endif; ?>
-</li>
-
+                    <li class="user_mobile"><a href="@(cliente == null ? "/Login/Index" : "/Perfil")"><img src="../Content/image/icons/svg/user.svg" alt="Usuario" /></a></li>
                     <li class="carrito_mobile"><a href="/ShoppingCart"><img src="../Content/image/icons/svg/cart.svg" alt="Mi Carrito" /></a></li>
                 </ul>
 
@@ -215,24 +198,23 @@ session_start();  // Asegurarse de iniciar la sesión
                 <ul>
 
                 <li>
-                            <?php if(isset($_SESSION['name'])): ?>
-                                <a href="/Perfil" class="account-text" title="Mi Perfil">
-                                    <?= $_SESSION['name'] ?> <i class="fa fa-user-circle-o"></i>
-                                </a>
-                            <?php else: ?>
-                                <a href="/Login/Index" class="account-text" title="Mi Cuenta">
-                                    Mi Cuenta <i class="fa fa-user-circle-o"></i>
-                                </a>
-                            <?php endif; ?>
-                </li>
-                
-                    
+                    <?php if(isset($_SESSION['name'])): ?>
+                        <a href="/Perfil" class="account-text" title="Mi Perfil">
+                            <?= $_SESSION['name'] ?> <i class="fa fa-user-circle-o"></i>
+                        </a>
+                    <?php else: ?>
+                        <a href="../index.php" class="account-text" title="Mi Cuenta">
+                            Mi Cuenta <i class="fa fa-user-circle-o"></i>
+                        </a>
+                    <?php endif; ?>
+                </li>                
                 <li>
                     <a href="/ShoppingCart" title="Mi Carrito">
                         <img src="../Content/image/icons/cart.png" alt="">
                         <span class="cart-no" id="cart-count">0</span>
                     </a>
                 </li>
+
                 </ul>
             </div>
         </div>
@@ -342,7 +324,7 @@ session_start();  // Asegurarse de iniciar la sesión
                             </ul>
                         
                     </li>
-                    <li><a href="/HomeShop.php">Shop</a></li>
+                    <li><a href="/Producto">Shop</a></li>
                     <li><a href="/Helper/Nosotros">Nosotros</a></li>
                     <li><a href="/Helper/Postulacion">Postule</a></li>
                     <li><a href="/Helper/Contacto">Contacto</a></li>
@@ -351,77 +333,13 @@ session_start();  // Asegurarse de iniciar la sesión
         </div>
 
     </header>
-    <div id="miCarrusel" class="carousel slide" data-ride="carousel">
-        <!-- Indicadores -->
-        <ol class="carousel-indicators">
-            <li data-target="#miCarrusel" data-slide-to="0" class="active"></li>
-            <li data-target="#miCarrusel" data-slide-to="1"></li>
-        </ol>
 
-        <!-- Imágenes del carrusel -->
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="../Content/image/master1.png" alt="Imagen 1" class="d-block w-100">
-            </div>
-            <div class="carousel-item">
-                <img src="../Content/image/master2.jpg" alt="Imagen 2" class="d-block w-100">
-            </div>
-          
-        </div>
-
-        <!-- Controles -->
-        <a class="carousel-control-prev" href="#miCarrusel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Anterior</span>
-        </a>
-        <a class="carousel-control-next" href="#miCarrusel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Siguiente</span>
-        </a>
+    <div class="container mt-4">
+    <h3 class="text-center">Productos</h3>
+    <div class="row" id="product-container">
+        <!-- Los productos se cargarán aquí mediante AJAX -->
     </div>
-
-    <section class="row-section">
-        <div class="servicios content">
-            <div class="grid-content grid-three gap-3">
-                <div class="info-align-center">
-                    <div>
-                        <img src="../Content/image/icons/servicio_rapido_icon.png" alt="">
-                    </div>
-                    <div class="info-servicios">
-                        <h5>Servicio rápido de entrega</h5>
-                        <p>Entregamos todos tus pedidos de manera confiable e inmediata en todo Lima-Perú.</p>
-                    </div>
-                </div>
-                <div class="info-align-center">
-                    <div>
-                        <img src="../Content/image/icons/seguridad_icon.png" alt="">
-                    </div>
-                    <div class="info-servicios">
-                        <h5>Seguridad</h5>
-                        <p>Contamos con certificación SSL para proteger tus datos y cuentas personales en todas tus compras.</p>
-                    </div>
-                </div>
-                <div class="info-align-center">
-                    <div>
-                        <img src="../Content/image/icons/facilidad_icon.png" alt="">
-                    </div>
-                    <div class="info-servicios">
-                        <h5>Facilidad para comprar</h5>
-                        <p>Esta web shop es responsiva, fácil de manejar en diferentes soportes digitales.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="row-section">
-        <div class="content">
-            <div class="text-center">
-                <h3>Productos</h3>
-            </div>
-        </div>
-    </section>
-
-
+</div>
     <!-- Suscríbete -->
     <section class="acciones row-section desktop-footer @(Request.Url.AbsoluteUri.Contains("Postulacion") ? "hidden" :  "")">
         <div class="content">
@@ -577,7 +495,6 @@ session_start();  // Asegurarse de iniciar la sesión
     </footer>
 
     <script type="text/javascript" src="../Content/js/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../Content/js/owl-carousel/owl.carousel.min.js"></script>
 
     <!-- Jquery Validation -->
   
@@ -588,7 +505,6 @@ session_start();  // Asegurarse de iniciar la sesión
     <script type="text/javascript" src="../Content/js/app.min.js"></script>
     <script type="text/javascript" src="../Content/plugins/jquery.dlmenu/modernizr.custom.js"></script>
     <script type="text/javascript" src="../Content/plugins/jquery.dlmenu/jquery.dlmenu.js"></script>
-
     <script>
         // Variables de PHP a JavaScript
         <?php
@@ -604,6 +520,7 @@ session_start();  // Asegurarse de iniciar la sesión
         ?>
     </script>
     <script>
+
         $(function () {
             $('#dl-menu').dlmenu();
 
@@ -634,15 +551,81 @@ session_start();  // Asegurarse de iniciar la sesión
                 window.location.href = "/Producto/Details/" + productoSeleccionado;
             }
         });
-       
         $(document).ready(function() {
-                $('#cart-count').text(userCarrito);  // Actualiza el contenido del span con el valor de carrito
-    });
+            $('#cart-count').text(userCarrito); 
+                cargarProductos();
+                buscarDetalleCarrito(userCarrito);
+            });
 
+            function cargarProductos() {
+                $.ajax({
+                    url: '../controllers/Producto/MostrarProducto.php',  // Ruta al archivo PHP
+                    type: 'GET',                         // Método de la solicitud
+                    success: function(data) {            // Función a ejecutar si la solicitud es exitosa
+                        $('#product-container').html(data);
+                    },
+                    error: function(xhr, status, error) {  // Función a ejecutar si hay un error en la solicitud
+                        console.error("Error al cargar productos: " + error);
+                        $('#product-container').html('<p>Ocurrió un error al cargar los productos.</p>');
+                    }
+                });
+            }
+/*
+            function agregarAlCarrito(pkProducto) {
+                console.log("Producto agregado al carrito: " + pkProducto);
+            }*/
+            
+
+            function agregarAlCarrito(pkProducto) {
+                var pkCarrito = userCarrito; // Asegúrate de que esta variable está correctamente definida y accesible
+                console.log("Producto agregado al carrito: " + pkProducto+ ','+userCarrito );
+
+                
+                $.ajax({
+                    url: '../controllers/Carrito/AgregarDetalleCarrito.php', // Asegúrate de que la ruta es correcta
+                    type: 'POST',
+                    asyn: false,
+                    data: {
+                        pkProducto: pkProducto,
+                        pkCarrito: pkCarrito
+                    },
+                    success: function(response) {
+                        console.log('Respuesta del servidor:', response);
+                        // Aquí puedes agregar lógica adicional para actualizar la interfaz de usuario,
+                        // como mostrar un mensaje de éxito, actualizar el número total de ítems en el carrito, etc.
+                        alert('Producto añadido al carrito correctamente.');
+                        buscarDetalleCarrito(userCarrito); // Actualizar el número en el ícono del carrito
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al añadir producto al carrito:', xhr.responseText);
+                        alert('No se pudo añadir el producto al carrito.');
+                    }
+                });
+            }
+
+
+
+
+            function buscarDetalleCarrito(userCarrito) {
+            $.ajax({
+                url: '../controllers/Carrito/BuscarDetalleCarrito.php', 
+                type: 'POST',
+                async: false,
+                data: { userCarrito: userCarrito },
+                success: function(response) {
+                    console.log('Respuesta recibida:', response); 
+                    $('#cart-count').text(response); 
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al realizar la petición:', xhr.responseText);
+                }
+            });
+        }
     </script>
 
 
     <script type="text/javascript" src="../Content/plugins/Jquery.CustomScrollBar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../Content/js/owl-carousel/owl.carousel.min.js"></script>
 
     <script type="text/javascript">
         var acc = document.getElementsByClassName("accordion_footer");

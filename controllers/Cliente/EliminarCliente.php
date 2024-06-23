@@ -1,45 +1,35 @@
 <?php
-
 include('../../administrador/config/bd.php');
 
-echo $_POST['id'];
-// Obtenemos los valores del formulario
 $id = $_POST['id'];
-
-// Abrimos la conexión a la base de datos
 $conn = conectar();
 
-// Consulta el dato a eliminar en la base de datos
-$sql = "SELECT cNombre, cApellido FROM cliente WHERE pkcliente = " . $id;
+$sql = "SELECT cNombre, cApellido, fkUsuario FROM cliente WHERE pkcliente = $id";
 $result = mysqli_query($conn, $sql);
-
-$nombres = '';
-$ape_paterno = '';
-$ape_materno = '';
 
 if ($row = mysqli_fetch_assoc($result)) {
     $nombres = $row['cNombre'];
     $ape_paterno = $row['cApellido'];
-}
-    
-// Elimina el dato de la tabla cliente
-$sqlCliente = "DELETE FROM cliente WHERE pkcliente = " . $id;
-$resultCliente = mysqli_query($conn, $sqlCliente);
+    $fkUsuario = $row['fkUsuario'];
 
-// Elimina el dato de la tabla usuario
-$sqlUsuario = "DELETE FROM usuario WHERE pkusuario = " . $id;
-$resultUsuario = mysqli_query($conn, $sqlUsuario);
+    $sqlCliente = "DELETE FROM cliente WHERE pkcliente = $id";
+    $resultCliente = mysqli_query($conn, $sqlCliente);
 
-if ($resultCliente && $resultUsuario) {
-    $msg = 'El Cliente ' . $nombres . ' ' . $ape_paterno . ' ha sido eliminado correctamente';
+    if ($resultCliente) {
+        $sqlUsuario = "DELETE FROM usuario WHERE pkusuario = $fkUsuario";
+        $resultUsuario = mysqli_query($conn, $sqlUsuario);
+        if ($resultUsuario) {
+            $msg = 'El Cliente y Usuario ' . $nombres . ' ' . $ape_paterno . ' han sido eliminados correctamente';
+        } else {
+            $msg = 'Error al eliminar el usuario: ' . mysqli_error($conn);
+        }
+    } else {
+        $msg = 'Error al eliminar el cliente: ' . mysqli_error($conn);
+    }
 } else {
-    $msg = 'Error al eliminar el cliente: ' . mysqli_error($conn);
+    $msg = 'Error: No se encontró el cliente con ID ' . $id;
 }
 
 echo $msg;
-
-// Cerramos la conexión a la base de datos
 desconectar($conn);
-
 ?>
-

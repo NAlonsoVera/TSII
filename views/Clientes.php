@@ -263,7 +263,7 @@ function eliminar_form(id){
 		 title: 'Eliminacion de Alumno',
 		 text: valor
 	   });
-	   cargarClientes1();
+	   cargarClientes();
 }
    function cargarClientes(){
     $.ajax({ 

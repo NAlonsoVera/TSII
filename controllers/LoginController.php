@@ -1,8 +1,9 @@
 <?php
 include('../administrador/config/bd.php');
+
 $email = $_POST['username'];
 $password_user = $_POST['password'];
-$sql = "SELECT * FROM usuario WHERE cCorreo = '".$email."'";
+$sql = "SELECT * FROM usuario WHERE cCorreo = '$email'";
 $conn = conectar();
 $result = mysqli_query($conn, $sql);
 
@@ -15,6 +16,7 @@ if ($result->num_rows > 0) {
         if ($password_user === $row['cPassword']) {
             session_start();
             $_SESSION['session_email'] = $email; 
+            $_SESSION['name'] = $row['cNombre']; // Almacenar el nombre en la sesión
             echo 'success-admin';  // Respuesta para éxito de login de administrador
         } else {
             echo 'error';  // Respuesta para error de login
@@ -22,9 +24,35 @@ if ($result->num_rows > 0) {
     } else {
         // Desencriptar y comparar para usuarios que no son administradores
         if (password_verify($password_user, $row['cPassword'])) {
-            session_start();
-            $_SESSION['session_email'] = $email;
-            echo 'success-user'; // Respuesta para éxito de login de usuario
+            $userId = $row['pkUsuario'];
+            
+            // Buscar pkCliente usando el fkUsuario (userId)
+            $sqlCliente = "SELECT pkCliente FROM Cliente WHERE fkUsuario = '$userId'";
+            $resultCliente = mysqli_query($conn, $sqlCliente);
+
+            if ($resultCliente->num_rows > 0) {
+                $rowCliente = mysqli_fetch_assoc($resultCliente);
+                $clienteId = $rowCliente['pkCliente'];
+
+                // Buscar pkCarrito usando el fkCliente (clienteId)
+                $sqlCarrito = "SELECT pkCarrito FROM carrito WHERE fkCliente = '$clienteId'";
+                $resultCarrito = mysqli_query($conn, $sqlCarrito);
+
+                if ($resultCarrito->num_rows > 0) {
+                    $rowCarrito = mysqli_fetch_assoc($resultCarrito);
+                    $carritoId = $rowCarrito['pkCarrito'];
+
+                    session_start();
+                    $_SESSION['session_email'] = $email;
+                    $_SESSION['name'] = $row['cNombre']; // Almacenar el nombre en la sesión
+                    $_SESSION['carrito_id'] = $carritoId; // Almacenar el pkCarrito en la sesión
+                    echo 'success-user'; // Respuesta para éxito de login de usuario
+                } else {
+                    echo 'error'; // Error al encontrar carrito
+                }
+            } else {
+                echo 'error'; // Error al encontrar cliente
+            }
         } else {
             echo 'error';
         }
